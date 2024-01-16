@@ -12,4 +12,6 @@ public interface DepartmentService {
     Department getDepartmentById(int id);
 
     void deleteDepartmentById(int id);
+
+    Department updateDepartment(int id, Department department);
 }
