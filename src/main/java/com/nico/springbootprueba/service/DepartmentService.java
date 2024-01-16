@@ -8,4 +8,6 @@ public interface DepartmentService {
     Department save(Department department);
 
     List<Department> getDepartments();
+
+    Department getDepartmentById(int id);
 }
