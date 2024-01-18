@@ -1,6 +1,7 @@
 package com.nico.springbootprueba.controller;
 
 import com.nico.springbootprueba.entity.Department;
+import com.nico.springbootprueba.error.DepartmentNotFoundException;
 import com.nico.springbootprueba.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments/{id}")
-    public Department getDepartmentById(@PathVariable("id") int id) {
+    public Department getDepartmentById(@PathVariable("id") int id) throws DepartmentNotFoundException {
         return departmentService.getDepartmentById(id);
     }
 

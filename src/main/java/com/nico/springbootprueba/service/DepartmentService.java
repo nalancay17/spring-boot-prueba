@@ -1,6 +1,7 @@
 package com.nico.springbootprueba.service;
 
 import com.nico.springbootprueba.entity.Department;
+import com.nico.springbootprueba.error.DepartmentNotFoundException;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface DepartmentService {
 
     List<Department> getDepartments();
 
-    Department getDepartmentById(int id);
+    Department getDepartmentById(int id) throws DepartmentNotFoundException;
 
     void deleteDepartmentById(int id);
 

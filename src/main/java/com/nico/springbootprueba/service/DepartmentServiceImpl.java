@@ -1,6 +1,7 @@
 package com.nico.springbootprueba.service;
 
 import com.nico.springbootprueba.entity.Department;
+import com.nico.springbootprueba.error.DepartmentNotFoundException;
 import com.nico.springbootprueba.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department getDepartmentById(int id) {
-        return departmentRepository.findById(id).orElse(null);
+    public Department getDepartmentById(int id) throws DepartmentNotFoundException {
+        return departmentRepository.findById(id).orElseThrow(() ->
+                new DepartmentNotFoundException("Department not available")
+        );
     }
 
     @Override
