@@ -1,6 +1,7 @@
 package com.nico.springbootprueba.service;
 
 import com.nico.springbootprueba.entity.Department;
+import com.nico.springbootprueba.error.DepartmentNameExistsException;
 import com.nico.springbootprueba.error.DepartmentNotFoundException;
 import com.nico.springbootprueba.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
     @Override
-    public Department save(Department department) {
+    public Department save(Department department) throws DepartmentNameExistsException {
+        departmentNameNotExistsVerification(department.getName());
         return departmentRepository.save(department);
     }
 
@@ -52,5 +54,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department getDepartmentByName(String name) {
         return departmentRepository.findByName(name);
+    }
+
+    private boolean departmentNameExists(String name) {
+        return departmentRepository.countByName(name) > 0;
+    }
+
+    private void departmentNameNotExistsVerification(String name) throws DepartmentNameExistsException {
+        if (departmentNameExists(name))
+            throw new DepartmentNameExistsException("The department name already exists");
     }
 }

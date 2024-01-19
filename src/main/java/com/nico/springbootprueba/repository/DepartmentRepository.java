@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface DepartmentRepository extends JpaRepository<Department, Integer> {
 
     Department findByName(String name);
+
+    int countByName(String name);
 }

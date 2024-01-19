@@ -1,6 +1,7 @@
 package com.nico.springbootprueba.controller;
 
 import com.nico.springbootprueba.entity.Department;
+import com.nico.springbootprueba.error.DepartmentNameExistsException;
 import com.nico.springbootprueba.error.DepartmentNotFoundException;
 import com.nico.springbootprueba.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @PostMapping("/departments")
-    public Department save(@RequestBody Department department) {
+    public Department save(@RequestBody Department department) throws DepartmentNameExistsException {
         return departmentService.save(department);
     }
 

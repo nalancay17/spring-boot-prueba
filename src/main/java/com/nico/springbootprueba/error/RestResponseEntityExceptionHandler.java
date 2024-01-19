@@ -26,6 +26,17 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(exception, message, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
+    @ExceptionHandler(DepartmentNameExistsException.class)
+    public ResponseEntity<Object> departmentNameExistsException(DepartmentNameExistsException exception, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+                getTimestamp(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT,
+                exception.getMessage()
+        );
+        return handleExceptionInternal(exception, message, new HttpHeaders(), HttpStatus.CONFLICT, request);
+    }
+
     private String getTimestamp() {
         long time = System.currentTimeMillis();
         return new Timestamp(time).toInstant().toString();

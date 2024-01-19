@@ -1,12 +1,13 @@
 package com.nico.springbootprueba.service;
 
 import com.nico.springbootprueba.entity.Department;
+import com.nico.springbootprueba.error.DepartmentNameExistsException;
 import com.nico.springbootprueba.error.DepartmentNotFoundException;
 
 import java.util.List;
 
 public interface DepartmentService {
-    Department save(Department department);
+    Department save(Department department) throws DepartmentNameExistsException;
 
     List<Department> getDepartments();
 
