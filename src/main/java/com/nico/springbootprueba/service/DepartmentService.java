@@ -12,7 +12,7 @@ public interface DepartmentService {
 
     Department getDepartmentById(int id) throws DepartmentNotFoundException;
 
-    void deleteDepartmentById(int id);
+    void deleteDepartmentById(int id) throws DepartmentNotFoundException;
 
     Department updateDepartment(int id, Department department);
 

@@ -30,7 +30,7 @@ public class DepartmentController {
     }
 
     @DeleteMapping("/departments/{id}")
-    public String deleteDepartmentById(@PathVariable("id") int id) {
+    public String deleteDepartmentById(@PathVariable("id") int id) throws DepartmentNotFoundException {
         departmentService.deleteDepartmentById(id);
         return "Department deleted successfully";
     }
