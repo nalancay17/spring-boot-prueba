@@ -37,7 +37,7 @@ public class DepartmentController {
     }
 
     @PutMapping("/departments/{id}")
-    public Department updateDepartment(@PathVariable("id") int id, @RequestBody Department department) {
+    public Department updateDepartment(@PathVariable("id") int id, @RequestBody Department department) throws DepartmentNotFoundException, DepartmentNameExistsException {
         return departmentService.updateDepartment(id, department);
     }
 

@@ -40,10 +40,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department updateDepartment(int id, Department department) {
-        Department depDb = departmentRepository.findById(id).get();
-        if (department.getName() != null && !department.getName().isEmpty())
+    public Department updateDepartment(int id, Department department) throws DepartmentNotFoundException, DepartmentNameExistsException {
+        Department depDb = getDepartmentById(id);
+        if (department.getName() != null && !department.getName().isEmpty()) {
+            departmentNameNotExistsVerification(department.getName());
             depDb.setName(department.getName());
+        }
         if (department.getAddress() != null && !department.getAddress().isEmpty())
             depDb.setAddress(department.getAddress());
         if (department.getCode() != null && !department.getCode().isEmpty())
