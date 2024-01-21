@@ -55,9 +55,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getDepartmentByName(String name) throws DepartmentNotFoundException {
-        if (!departmentNameExists(name))
-            throw new DepartmentNotFoundException("No department named '" + name + "'");
-        return departmentRepository.findByName(name);
+        return departmentRepository.findByName(name).orElseThrow(() ->
+                new DepartmentNotFoundException("No department named '" + name + "'")
+        );
     }
 
     private boolean departmentNameExists(String name) {
