@@ -4,7 +4,6 @@ import com.nico.springbootprueba.entity.Department;
 import com.nico.springbootprueba.error.DepartmentNameExistsException;
 import com.nico.springbootprueba.error.DepartmentNotFoundException;
 import com.nico.springbootprueba.repository.DepartmentRepository;
-import org.aspectj.weaver.patterns.DeclareParentsMixin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +34,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void deleteDepartmentById(int id) throws DepartmentNotFoundException {
-        if (departmentRepository.existsById(id))
-            departmentRepository.deleteById(id);
-        throw new DepartmentNotFoundException("Department not available");
+        if (!departmentRepository.existsById(id))
+            throw new DepartmentNotFoundException("Department not available");
+        departmentRepository.deleteById(id);
     }
 
     @Override
