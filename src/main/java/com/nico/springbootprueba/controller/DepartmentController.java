@@ -42,7 +42,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments/name/{name}")
-    public Department getDepartmentByName(@PathVariable("name") String name) {
+    public Department getDepartmentByName(@PathVariable("name") String name) throws DepartmentNotFoundException {
         return departmentService.getDepartmentByName(name);
     }
 }

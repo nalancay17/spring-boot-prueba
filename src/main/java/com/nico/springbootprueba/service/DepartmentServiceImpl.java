@@ -4,6 +4,7 @@ import com.nico.springbootprueba.entity.Department;
 import com.nico.springbootprueba.error.DepartmentNameExistsException;
 import com.nico.springbootprueba.error.DepartmentNotFoundException;
 import com.nico.springbootprueba.repository.DepartmentRepository;
+import org.aspectj.weaver.patterns.DeclareParentsMixin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +55,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department getDepartmentByName(String name) {
+    public Department getDepartmentByName(String name) throws DepartmentNotFoundException {
+        if (!departmentNameExists(name))
+            throw new DepartmentNotFoundException("No department named '" + name + "'");
         return departmentRepository.findByName(name);
     }
 
